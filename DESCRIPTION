@@ -1,0 +1,28 @@
+Package: arpcPRFproj
+Title: Project USDA Pasture, Rangeland, Forage Insurance Outcomes
+Version: 0.0.0.9000
+Authors@R:
+    person("James", "Keeler", email = "keelerjamesb@gmail.com", role = c("aut", "cre"))
+Description: Tools for projecting indemnities, liabilities, premiums, and
+    related metrics for the USDA Risk Management Agency's Pasture, Rangeland,
+    Forage (PRF) Rainfall Index insurance program.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+Depends:
+    R (>= 4.0.0)
+Imports:
+    data.table,
+    ggplot2,
+    rfcip,
+    stats,
+    tools,
+    utils
+Remotes:
+    dylan-turner25/rfcip
+Suggests:
+    testthat (>= 3.0.0),
+    withr
+Config/testthat/edition: 3
+Config/roxygen2/version: 8.0.0
+LazyData: true

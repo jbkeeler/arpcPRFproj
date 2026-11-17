@@ -1,0 +1,16 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+^\.Rprofile$
+^.*\.code-workspace$
+^\.vscode$
+^LICENSE\.md$
+^README\.Rmd$
+^data-raw$
+^figures$
+^tables$
+^paper$
+^output$
+^archive$
+^docs$
+^_pkgdown\.yml$
+^METHODS\.md$
