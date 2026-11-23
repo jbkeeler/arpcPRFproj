@@ -14,7 +14,7 @@ get_prf_outlook(
 \arguments{
 \item{level}{\code{"county"} (the default), \code{"state"}, or \code{"national"}.}
 
-\item{tag}{Release tag, e.g. \code{"prf-outlook-2025"}. \code{"latest"} (the
+\item{tag}{Release tag, e.g. \code{"v1.0.0.2026"}. \code{"latest"} (the
 default) is the repository's most recent published release.}
 
 \item{repo}{GitHub repository holding the releases, as \code{"owner/name"}.}
@@ -49,6 +49,6 @@ under both, so filter on \code{.source} before summing over years.
 county <- get_prf_outlook()
 county[commodity_year == 2030]
 
-get_prf_outlook("national", tag = "prf-outlook-2025")
+get_prf_outlook("national", tag = "v1.0.0.2026")
 }
 }

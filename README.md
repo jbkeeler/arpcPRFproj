@@ -141,7 +141,7 @@ repository. To publish one:
 
    ```sh
    gh auth login   # once
-   gh release create prf-outlook-2025 \
+   gh release create v1.0.0.2026 \
      data-raw/releases/prf-outlook/final_prf_outlook_county.csv \
      data-raw/releases/prf-outlook/final_prf_outlook_state.csv \
      data-raw/releases/prf-outlook/final_prf_outlook_national.csv \
@@ -156,11 +156,11 @@ repository. To publish one:
 4. **Check it:** `get_prf_outlook("national")` should return the new
    release.
 
-Name tags `prf-outlook-<baseline year>`, adding a suffix such as
-`prf-outlook-2025.1` to re-issue a baseline. With no tag,
-`get_prf_outlook()` reads the release GitHub marks as latest. Any other
-release published later, such as a package version without these files
-attached, becomes latest instead; mark it `--latest=false`.
+Tags follow the `v1.0.0.2026` pattern used for the first release (2025
+baseline, released in 2026). With no tag, `get_prf_outlook()` reads the
+release GitHub marks as latest. Any other release published later, such as
+a package version without these files attached, becomes latest instead;
+mark it `--latest=false`.
 
 ## AI disclosure
 

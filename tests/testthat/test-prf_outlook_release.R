@@ -1,8 +1,8 @@
 test_that("prf_release_url builds latest and tagged asset URLs", {
   expect_equal(prf_release_url("a.csv", repo = "o/r"),
                "https://github.com/o/r/releases/latest/download/a.csv")
-  expect_equal(prf_release_url("a.csv", tag = "prf-outlook-2025", repo = "o/r"),
-               "https://github.com/o/r/releases/download/prf-outlook-2025/a.csv")
+  expect_equal(prf_release_url("a.csv", tag = "v1.0.0.2026", repo = "o/r"),
+               "https://github.com/o/r/releases/download/v1.0.0.2026/a.csv")
 })
 
 # A county outlook as script 03 writes it, served in place of the download.
@@ -57,7 +57,7 @@ test_that("get_prf_outlook keeps a published loss_ratio and skips FIPS above cou
                                     commodity_code, insurance_plan_code, unit_structure_code),
                              .SDcols = prf_outcome_cols][, loss_ratio := 9]
   local_release_asset(national)
-  outlook <- get_prf_outlook("national", tag = "prf-outlook-2025", repo = "o/r")
+  outlook <- get_prf_outlook("national", tag = "v1.0.0.2026", repo = "o/r")
 
   expect_false("county_fips" %in% names(outlook))
   expect_equal(unique(outlook$loss_ratio), 9)

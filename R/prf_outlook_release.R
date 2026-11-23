@@ -34,7 +34,7 @@ download_release_asset <- function(url, dest) {
 #' under both, so filter on `.source` before summing over years.
 #'
 #' @param level `"county"` (the default), `"state"`, or `"national"`.
-#' @param tag Release tag, e.g. `"prf-outlook-2025"`. `"latest"` (the
+#' @param tag Release tag, e.g. `"v1.0.0.2026"`. `"latest"` (the
 #'   default) is the repository's most recent published release.
 #' @param repo GitHub repository holding the releases, as `"owner/name"`.
 #' @param projected_only If `TRUE` (the default), keep projected years only.
@@ -53,7 +53,7 @@ download_release_asset <- function(url, dest) {
 #' county <- get_prf_outlook()
 #' county[commodity_year == 2030]
 #'
-#' get_prf_outlook("national", tag = "prf-outlook-2025")
+#' get_prf_outlook("national", tag = "v1.0.0.2026")
 #' }
 #' @export
 get_prf_outlook <- function(level = c("county", "state", "national"), tag = "latest",
