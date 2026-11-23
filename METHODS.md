@@ -482,7 +482,7 @@ files and stops if any are missing.
 | [00_prf_outlook_setup_and_data.R](data-raw/scripts/prf-outlook/00_prf_outlook_setup_and_data.R) | Settings; SOB-TPU book of business | `prf_outlook_settings.rds`, `book.rds` |
 | [01_prf_outlook_models.R](data-raw/scripts/prf-outlook/01_prf_outlook_models.R) | Indemnity backtest, large-county calibration, acreage model | `backtest.rds`, `calibration.rds`, `acreage_fit.rds` |
 | [02_prf_outlook_projection.R](data-raw/scripts/prf-outlook/02_prf_outlook_projection.R) | Projection under the acreage scenarios in the settings (`main`; `flat_acres` is available but off for now); arpcFCIPproj county outlooks | `projection_<scenario>.rds`, `outlook_county_<scenario>.rds` |
-| [03_prf_outlook_release.R](data-raw/scripts/prf-outlook/03_prf_outlook_release.R) | County, state, and national outlooks; national indemnity ranges; a record of the run | `final_prf_outlook_<level>.rds/.csv`, `prf_indemnity_ranges.csv`, `prf_outlook_run.rds` |
+| [03_prf_outlook_release.R](data-raw/scripts/prf-outlook/03_prf_outlook_release.R) | County, state, and national outlooks with loss ratio (the GitHub release files read by `get_prf_outlook()`); national indemnity ranges; a record of the run | `final_prf_outlook_<level>.rds/.csv`, `prf_indemnity_ranges.csv`, `prf_outlook_run.rds` |
 | [200_prf_outlook_exhibits.R](data-raw/scripts/prf-outlook/200_prf_outlook_exhibits.R) | Figures | `figures/*.png` |
 
 **Settings.** These are set in script 00: baseline year (default

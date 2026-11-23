@@ -29,5 +29,5 @@ utils::globalVariables(c(
   "panel", "speed", "ceiling", "low", "high",
   "grid_class", "has_grids", "is_expected", "scaled_liability", "calibration_factor",
   "i.calibration_factor", "i.county_payment_factor", "size_ratio", "i.size_ratio", "i.actual", "i.predicted",
-  "weather_year", "commodity_year", "deleted_date", "area_rate_id"
+  "weather_year", "county_fips", "commodity_year", "deleted_date", "area_rate_id"
 ))

@@ -8,7 +8,11 @@
 #  INPUTS   prf_outlook_settings.rds, outlook_county_<scenario>.rds,
 #           calibration.rds, acreage_fit.rds (scripts 00-02)
 #  OUTPUTS  final_prf_outlook_<county|state|national>.rds and .csv
-#              arpcFCIPproj outlook layout plus a `scenario` column
+#              arpcFCIPproj outlook layout plus `scenario` and `loss_ratio`
+#              (indemnity / total premium). The .rds files hold observed and
+#              projected years; the .csv files, the assets of the GitHub
+#              outlook release read by get_prf_outlook(), hold projected years
+#              only.
 #           prf_indemnity_ranges.csv
 #              national indemnity and loss ratio percentiles by year
 #           prf_outlook_run.rds
@@ -56,10 +60,17 @@ levels <- list(county = c("state_code", "county_code"), state = "state_code", na
 for (level in names(levels)) {
   final <- county[, lapply(.SD, sum), by = c(id_cols, levels[[level]]),
                   .SDcols = prf_outcome_cols]
+  # Loss ratio after summing, so each level's ratio is of its own totals.
+  final[, loss_ratio := fifelse(total_premium_amount > 0,
+                                indemnity_amount / total_premium_amount, NA_real_)]
   setcolorder(final, c("scenario", "commodity_year", levels[[level]]))
   setorderv(final, c("scenario", ".source", "commodity_year", levels[[level]]))
   saveRDS(final, file.path(release_directory, paste0("final_prf_outlook_", level, ".rds")))
-  fwrite(final, file.path(release_directory, paste0("final_prf_outlook_", level, ".csv")))
+  # The .csv files are the GitHub release assets, so they hold the projected
+  # years only (baseline on). The .rds keeps the observed history too. To
+  # publish the history as well, write `final` here unfiltered.
+  fwrite(final[.source == "projected"],
+         file.path(release_directory, paste0("final_prf_outlook_", level, ".csv")))
 }
 
 # ---- National indemnity ranges across past rainfall years

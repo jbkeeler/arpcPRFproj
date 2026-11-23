@@ -24,8 +24,24 @@ devtools::install_github("jbkeeler/arpcPRFproj")
 
 ## Quick start
 
+To use the published outlook without running anything:
+
 ```r
 library(arpcPRFproj)
+
+# Latest release: projected acres, liability, premium, subsidy, indemnity,
+# and loss ratio by county and year, from the baseline year on ("state" and
+# "national" also available)
+county <- get_prf_outlook()
+county[commodity_year == 2030]
+```
+
+Releases hold the projected years only. The observed history stays in the
+local `.rds` tables that the outlook scripts write.
+
+To build a projection yourself:
+
+```r
 
 # Book of business: SOB-TPU summed to county x type x interval x coverage
 book <- build_prf_book(get_prf_sobtpu(baseline = 2025, window = 13))
@@ -112,6 +128,39 @@ year, windows, nowcast, calibration, and `scenarios`. Only the `main`
 acreage scenario is released for now; add `"flat_acres"` to `scenarios` to
 release the flat-acres comparison as well. Outputs go to
 `data-raw/releases/prf-outlook/` (gitignored). See METHODS.md §9.
+
+### Publishing an outlook
+
+`get_prf_outlook()` reads the files attached to a GitHub release of this
+repository. To publish one:
+
+1. **Run the outlook** (above) and check the printed national totals.
+2. **Commit and push the code**, so the release tag points to the code that
+   produced it.
+3. **Create the release**, attaching the tables under their exact names:
+
+   ```sh
+   gh auth login   # once
+   gh release create prf-outlook-2025 \
+     data-raw/releases/prf-outlook/final_prf_outlook_county.csv \
+     data-raw/releases/prf-outlook/final_prf_outlook_state.csv \
+     data-raw/releases/prf-outlook/final_prf_outlook_national.csv \
+     data-raw/releases/prf-outlook/prf_indemnity_ranges.csv \
+     data-raw/releases/prf-outlook/figures/prf_outlook.png \
+     --title "PRF outlook, 2025 baseline" --latest \
+     --notes "Baseline 2025, projected 2025-2035. Main acreage scenario."
+   ```
+
+   On the website, the same is Releases → Draft a new release, with the
+   files dragged into the assets box.
+4. **Check it:** `get_prf_outlook("national")` should return the new
+   release.
+
+Name tags `prf-outlook-<baseline year>`, adding a suffix such as
+`prf-outlook-2025.1` to re-issue a baseline. With no tag,
+`get_prf_outlook()` reads the release GitHub marks as latest. Any other
+release published later, such as a package version without these files
+attached, becomes latest instead; mark it `--latest=false`.
 
 ## AI disclosure
 
