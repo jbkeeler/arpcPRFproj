@@ -22,9 +22,13 @@ dir.create(release_directory, recursive = TRUE, showWarnings = FALSE)
 
 # ---- Settings. Saved first, so a failure below cannot leave later scripts
 # reading the previous run's settings.
+baseline_year   <- prf_policy_year() - 1L     # last full SOB year
+projection_end  <- 2037L                      # last projected year
+stopifnot(projection_end > baseline_year)
+
 prf_outlook_settings <- list(
-  baseline_year     = prf_policy_year() - 1L,  # last full SOB year
-  projection_window = 10,                      # years projected past the baseline
+  baseline_year     = baseline_year,
+  projection_window = projection_end - baseline_year,  # years projected past the baseline
   history_window    = 13,                      # SOB years in the book (from 2013)
   acreage_fit_years = 3,                       # yearly acreage changes fitted
   nowcast           = FALSE,                    # realized rainfall for observed intervals in incomplete current year
